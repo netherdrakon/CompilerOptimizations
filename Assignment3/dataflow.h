@@ -68,6 +68,12 @@ namespace llvm{
 
         }
 
+        void GetPrevBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
+        void GetNextBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
+
+        
+
+
         void Initialize(Function &F);
 
 
