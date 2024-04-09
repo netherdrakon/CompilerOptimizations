@@ -52,6 +52,25 @@ namespace llvm{
         BitVector genSet;
         BitVector killSet;
         BitVector tfOut;
+        std::vector<BasicBlock*> prevblock;
+        std::vector<BasicBlock*> nextblock;
+    }
+
+    class DataFlow
+    {
+        private:
+        public:
+        std::vector<void*> domain;
+        std::map<BasicBlock*, BlockInfo*> BlockInfoMap;
+
+        Dataflow()
+        {
+
+        }
+
+        void Initialize(Function &F);
+
+
     }
 
     
