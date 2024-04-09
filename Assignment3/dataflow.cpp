@@ -24,9 +24,11 @@ namespace llvm {
         }
     }
 
-    void DataFlow::Initialize(Function &F)
+
+
+    void DataFlow::InitializeBlocks(Function &F)
     {
-        
+
     }
 
 

@@ -45,6 +45,7 @@ namespace llvm{
         EXIT
     }
 
+
     struct BlockInfo{
         enum BlockType btype;
         BitVector input;
@@ -59,22 +60,38 @@ namespace llvm{
     class DataFlow
     {
         private:
-        public:
-        std::vector<void*> domain;
-        std::map<BasicBlock*, BlockInfo*> BlockInfoMap;
-
-        Dataflow()
-        {
-
-        }
-
-        void GetPrevBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
-        void GetNextBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
-
+            int size;
+            BitVector boundary;
+            BitVector initial;
+            enum MeetOp meetOp;
+            enum Direction direction;
+            std::vector<BasicBlock*> instr_forward;
+            std::vector<BasicBlock*> instr_back;
         
+        
+        public:
+            std::vector<void*> domain;
+            std::map<BasicBlock*, BlockInfo*> BlockInfoMap;
+            std::map<BasicBlock*, std::vector<llvm::BitVector>*> BlockInstrMap;
 
 
-        void Initialize(Function &F);
+            DataFlow(int size, std::vector<void*> dom, enum MeetOperator m, enum Direction dir, BitVector b, BitVector in)
+            {
+                size = size;
+                domain = dom;
+                meetOp = m;
+                direction = dir;
+                boundary = b;
+                initial = in;
+            }
+
+            void GetPrevBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
+            void GetNextBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
+
+
+
+
+            void InitializeBlocks(Function &F);
 
 
     }
