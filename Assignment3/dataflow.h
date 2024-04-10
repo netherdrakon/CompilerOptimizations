@@ -48,6 +48,7 @@ namespace llvm{
 
     struct BlockInfo{
         enum BlockType btype;
+        BasicBlock* block;
         BitVector input;
         BitVector output;
         BitVector genSet;
@@ -88,10 +89,9 @@ namespace llvm{
             void GetPrevBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
             void GetNextBlocks(BasicBlock* currblock, struct BlockInfo* BInfo);
 
-
-
-
             void InitializeBlocks(Function &F);
+            void InitializeBoundary(Function &F);
+            
 
 
     }
